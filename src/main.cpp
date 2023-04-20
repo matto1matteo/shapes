@@ -1,13 +1,14 @@
+#include "shapes/rectangle.h"
 #include <iostream>
 #include <shapes/shapes.h>
+#include <shapes/circle.h>
 
 int main (int argc, char *argv[])
 {
-    #ifdef BUILD_TEST
-    std::cout << "Hello maaaan" << std::endl;
-    
-    #endif // DEBUG
-    
+    Circle c = Circle("ACircle", 1.0, -0.1, 10, 10, 5);
+    Rectangle r;
     std::cout << Greet("Matteo") << std::endl;
+    c.Print();
+    r.Print();
     return 0;
 }

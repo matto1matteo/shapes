@@ -10,6 +10,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(Shapes_sources
     "src/shapes.cpp"
+    "src/circle.cpp"
+    "src/rectangle.cpp"
 )
 set(SHAPE_LIB ShapesLib)
 add_library(${SHAPE_LIB} ${Shapes_sources})
