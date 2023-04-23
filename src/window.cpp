@@ -6,8 +6,13 @@
 
 Window Window::FromConfigFile(std::string config_file)
 {
-    Window window;
     std::fstream stream(config_file);
+    return Window::FromStream(stream);
+}
+
+Window Window::FromStream(std::istream & input)
+{
+    Window window;
     std::string resource_type;
 
     std::string shape_name;
@@ -17,46 +22,46 @@ Window Window::FromConfigFile(std::string config_file)
     int red = 0, green = 0, blue = 0;
 
     // Window
-    stream >> resource_type;
+    input >> resource_type;
     if (resource_type != "Window")
         throw "Something bad happened";
-    stream >> window.m_Width;
-    stream >> window.m_Height;
+    input >> window.m_Width;
+    input >> window.m_Height;
 
     // Font
-    stream >> resource_type;
+    input >> resource_type;
     if (resource_type != "Font")
         throw "Something bad happened";
-    stream >> window.m_Font;
+    input >> window.m_Font;
 
     // Shapes
     do {
-        stream >> resource_type;
-        stream >> shape_name;
+        input >> resource_type;
+        input >> shape_name;
         // Speed
-        stream >> speedX;
-        stream >> speedY;
+        input >> speedX;
+        input >> speedY;
 
         // Position
-        stream >> posX;
-        stream >> posY;
+        input >> posX;
+        input >> posY;
 
         // Colors
-        stream >> red;
-        stream >> green;
-        stream >> blue;
+        input >> red;
+        input >> green;
+        input >> blue;
 
         if (resource_type == "Circle") {
-            stream >> radius;
+            input >> radius;
             window.m_Shapes.push_back(new Circle(shape_name, speedX, speedX, posX, posY, radius));
         }
 
         if (resource_type == "Rectangle") {
-            stream >> width;
-            stream >> heigth;
+            input >> width;
+            input >> heigth;
             window.m_Shapes.push_back(new Rectangle(shape_name, speedX, speedY, posX, posY, width, heigth));
         }
-    } while (stream.eof() || stream.bad());
+    } while (input.eof() || input.bad());
 
     return window;
 }

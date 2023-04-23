@@ -1,4 +1,5 @@
 #include "shapes/shapes.h"
+#include <istream>
 #include <string>
 #include <vector>
 
@@ -13,6 +14,7 @@ public:
     ~Window() = default;
 
     static Window FromConfigFile(std::string config_file);
+    static Window FromStream(std::istream & input);
 
     // Accessors
     const int GetWidth() const { return m_Width; }
