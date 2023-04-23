@@ -1,0 +1,4 @@
+Window 800 600
+Font fonts/kingsmen.ttf
+Circle ACircle 100 100 -0.03 0.02 0 255 0 50
+Rectangle ERect 300 300 -0.02 0.02 100 100 100 50 10
