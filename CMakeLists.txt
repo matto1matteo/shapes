@@ -8,18 +8,35 @@ set(V_PATCH 1)
 project(${P_NAME} VERSION "${V_MAJOR}.${V_MINOR}.${V_PATCH}")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Shape Lib
 set(Shapes_sources
     "src/shapes.cpp"
+    "src/circle.cpp"
+    "src/rectangle.cpp"
 )
 set(SHAPE_LIB ShapesLib)
 add_library(${SHAPE_LIB} ${Shapes_sources})
 target_include_directories(${SHAPE_LIB} PUBLIC "include/shapes")
 
+# Window Lib
+set(Window_sources
+    "src/window.cpp"
+)
+set(WINDOW_LIB "WindowLib")
+add_library(${WINDOW_LIB} ${Window_sources})
+target_include_directories(${WINDOW_LIB}
+    PUBLIC "include/window")
+target_link_libraries(${WINDOW_LIB}
+    PUBLIC ${SHAPE_LIB})
+
+# Main Executable
 add_executable(${P_NAME} "src/main.cpp")
 target_link_libraries(${P_NAME} PUBLIC ${SHAPE_LIB})
+target_link_libraries(${P_NAME} PUBLIC ${WINDOW_LIB})
 
-list(APPEND CMAKE_MODULE_PATH "./cmake")
-include(dependencies)
+# list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
+message(STATUS "${CMAKE_CURRENT_LIST_DIR}/cmake/dependencies.cmake") 
+include("${CMAKE_CURRENT_LIST_DIR}/cmake/dependencies.cmake")
 set(CATCH_VERSION "3.3.2")
 dependency("https://github.com/catchorg/Catch2" "v${CATCH_VERSION}")
 
@@ -35,5 +52,5 @@ else()
     target_compile_definitions(${SHAPE_LIB}TEST PUBLIC BUILD_TEST)
 endif()
 
-message(STATUS "Building with tests: ${BUILD_TEST}")
+# message(STATUS "Building with tests: ${BUILD_TEST}")
 
