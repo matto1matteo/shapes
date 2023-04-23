@@ -12,6 +12,10 @@ public:
     Rectangle &operator=(Rectangle &&) = default;
     Rectangle &operator=(const Rectangle &) = default;
     ~Rectangle() = default;
+    Rectangle(std::string name, float speedX, float speedY, int posX, int posY, int width, int height)
+        : Shape(name, speedX, speedY, posX, posY)
+        , m_Width(width), m_Height(height)
+    {}
 
     std::string ToString() const override;
 
