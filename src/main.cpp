@@ -1,14 +1,15 @@
-#include "shapes/rectangle.h"
 #include <iostream>
 #include <ostream>
+#include <SFML/Graphics.hpp>
+
+#include <shapes/rectangle.h>
 #include <shapes/shapes.h>
 #include <shapes/circle.h>
-#include <window/window.h>
+#include <game/game.h>
 
 int main (int argc, char *argv[])
 {
-    Window w = Window::FromConfigFile("./config.txt");
-    std::cout << w.GetWidth() << " x " << w.GetHeigth() << std::endl;
-    return 0;
+    Game game = Game::FromConfigFile("/home/mattomatteo/Projects/shapes/config.txt");
+    return game.MainLoop();
 }
 
