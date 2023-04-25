@@ -1,4 +1,4 @@
-function(dependency repository tag)
+function(dependency dependency_name repository tag)
     include(FetchContent)
     message(STATUS "Fetching: ${repository} @ ${tag}")
 
@@ -7,9 +7,11 @@ function(dependency repository tag)
     endif()
     
     FetchContent_Declare(
-        Catch2
+        ${dependency_name}
         GIT_REPOSITORY "${repository}"
         GIT_TAG "${tag}"
+        GIT_SHALLOW TRUE
+        GIT_PROGRESS TRUE
         OVERRIDE_FIND_PACKAGE
     )
 endfunction()
