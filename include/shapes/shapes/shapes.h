@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 
+#include <SFML/Graphics.hpp>
+
 std::string Greet(std::string s);
 
 class Shape
@@ -25,6 +27,10 @@ public:
     const int GetSpeedX() const { return m_SpeedX; };
     const int GetSpeedY() const { return m_SpeedY; };
     const std::string GetName() const { return m_Name; };
+    void SetColor(std::uint8_t red, std::uint8_t green, std::uint8_t blue);
+    sf::Color GetSFMLColor() const;
+
+    virtual sf::Shape * GetSFMLShape() = 0;
 
 private:
     std::string m_Name;
@@ -32,5 +38,9 @@ private:
     int m_PosY;
     float m_SpeedX;
     float m_SpeedY;
+
+    std::uint8_t m_Red;
+    std::uint8_t m_Green;
+    std::uint8_t m_Blue;
 
 };

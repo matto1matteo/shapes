@@ -4,13 +4,22 @@
 #include <sstream>
 
 Circle::Circle(std::string name, float speedX, float speedY, int posX, int posY, int radius)
-    : Shape(name, posX, posY, speedX, speedY), m_Radius(radius)
+    : Shape(name, posX, posY, speedX, speedY)
+    , m_Radius(radius)
+    , m_Shape(radius)
 {
+    m_Shape.setPosition(GetPosX(), GetPosY());
+    m_Shape.setFillColor(GetSFMLColor());
 }
 
 void Circle::Print() const
 {
     std::cout << ToString() << std::endl;
+}
+
+sf::Shape * Circle::GetSFMLShape()
+{
+    return &m_Shape;
 }
 
 std::string Circle::ToString() const
@@ -23,3 +32,4 @@ std::string Circle::ToString() const
     stream << "---------------------------------------------\n";
     return stream.str();
 }
+

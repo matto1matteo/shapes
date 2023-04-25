@@ -14,10 +14,13 @@ public:
     ~Circle();
 
     void Print() const;
-    std::string ToString() const;
+    std::string ToString() const override;
+
+    sf::Shape * GetSFMLShape() override;
 
 private:
     int m_Radius;
+    sf::CircleShape m_Shape;
 };
 
 inline Circle::Circle()
