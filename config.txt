@@ -1,5 +1,5 @@
 Window 800 600
 Font fonts/kingsmen.ttf
-Circle ACircle 100 100 -0.03 0.02 0 255 0 50
-Rectangle ERect 600 300 -0.02 0.02 100 100 100 100 10
-Rectangle ARect 500 500 -0.02 0.02 255 0 0 100 10
+Circle ACircle 100 100 -1 0.5 0 255 0 50
+Rectangle ERect 600 300 -1 1.7 100 100 100 100 10
+Rectangle ARect 500 500 -1 -1.2 255 0 0 100 10

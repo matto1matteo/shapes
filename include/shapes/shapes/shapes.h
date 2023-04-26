@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <shapes/bound_box.h>
+
 std::string Greet(std::string s);
 
 class Shape
@@ -22,20 +24,25 @@ public:
     void Print() const;
     virtual std::string ToString() const = 0;
 
-    const int GetPosX() const { return m_PosX; };
-    const int GetPosY() const { return m_PosY; };
-    const int GetSpeedX() const { return m_SpeedX; };
-    const int GetSpeedY() const { return m_SpeedY; };
-    const std::string GetName() const { return m_Name; };
+    const float GetPosX() const { return m_PosX; }
+    void SetPosX(float posX) { m_PosX = posX; }
+    const float GetPosY() const { return m_PosY; }
+    void SetPosY(float posY) { m_PosY = posY; }
+    const float GetSpeedX() const { return m_SpeedX; }
+    void SetSpeedX(int speedX) { m_SpeedX = speedX; }
+    const float GetSpeedY() const { return m_SpeedY; }
+    void SetSpeedY(float speedY) { m_SpeedY = speedY; }
+    const std::string GetName() const { return m_Name; }
     void SetColor(std::uint8_t red, std::uint8_t green, std::uint8_t blue);
     sf::Color GetSFMLColor() const;
 
     virtual sf::Shape * GetSFMLShape() = 0;
+    virtual void MoveShape(BoundBox & b) = 0;
 
 private:
     std::string m_Name;
-    int m_PosX;
-    int m_PosY;
+    float m_PosX;
+    float m_PosY;
     float m_SpeedX;
     float m_SpeedY;
 

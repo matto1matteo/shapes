@@ -1,6 +1,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <iomanip>
 
 #include <SFML/Graphics.hpp>
 
@@ -47,8 +48,8 @@ Game Game::FromStream(std::istream & input)
         input >> posY;
 
         // Speed
-        input >> speedX;
-        input >> speedY;
+        input >> std::setprecision(10) >> speedX;
+        input >> std::setprecision(10) >> speedY;
 
         // Colors
         input >> red;
@@ -77,6 +78,7 @@ Game Game::FromStream(std::istream & input)
 int Game::MainLoop()
 {
     sf::RenderWindow w (sf::VideoMode(m_Width, m_Height), "Test 1");
+    w.setSize(sf::Vector2u(m_Width, m_Height));
     w.setFramerateLimit(60);
 
     while (w.isOpen())
@@ -94,6 +96,8 @@ int Game::MainLoop()
         w.clear();
         for (auto shape : m_Shapes)
         {
+            BoundBox b = { 0, 0, m_Width, m_Height };
+            shape->MoveShape(b);
             auto color = shape->GetSFMLColor();
             sf::Shape * sfml_shape = shape->GetSFMLShape();
             sfml_shape->setFillColor(color);

@@ -1,4 +1,4 @@
-#include "shapes/shapes.h"
+#include <shapes/shapes.h>
 #include <iostream>
 #include <shapes/circle.h>
 #include <sstream>
@@ -21,6 +21,40 @@ sf::Shape * Circle::GetSFMLShape()
 {
     return &m_Shape;
 }
+
+void Circle::MoveShape(BoundBox & b)
+{
+    // Check for bound box
+    // case for a clam utility function
+    SetPosX(GetPosX() + GetSpeedX());
+    if ((GetPosX() + (2 * m_Radius)) >= b.X)
+    {
+        SetPosX(b.X - (2 * m_Radius));
+        SetSpeedX(-GetSpeedX());
+    }
+    else if (GetPosX() <= b.ZeroX)
+    {
+        SetPosX(b.ZeroX);
+        SetSpeedX(-GetSpeedX());
+    }
+
+    SetPosY(GetPosY() + GetSpeedY());
+    if (GetPosY() >= b.Y)
+    {
+        SetPosY(b.Y - (2 * m_Radius));
+        SetSpeedY(-GetSpeedY());
+    }
+    else if (GetPosY() <= b.ZeroY)
+    {
+        SetPosY(b.ZeroY);
+        SetSpeedY(-GetSpeedY());
+    }
+    auto cur_position = m_Shape.getPosition();
+    cur_position.x += GetSpeedX();
+    cur_position.y += GetSpeedY();
+    m_Shape.setPosition(cur_position);
+}
+
 
 std::string Circle::ToString() const
 {

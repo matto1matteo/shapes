@@ -15,6 +15,7 @@ set(Shapes_sources
     "src/shapes.cpp"
     "src/circle.cpp"
     "src/rectangle.cpp"
+    "src/bound_box.cpp"
 )
 set(SHAPE_LIB ShapesLib)
 add_library(${SHAPE_LIB} ${Shapes_sources})

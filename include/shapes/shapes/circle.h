@@ -17,6 +17,7 @@ public:
     std::string ToString() const override;
 
     sf::Shape * GetSFMLShape() override;
+    void MoveShape(BoundBox & b) override;
 
 private:
     int m_Radius;
