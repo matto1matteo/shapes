@@ -24,35 +24,38 @@ std::string Rectangle::ToString() const
 
 void Rectangle::MoveShape(const BoundBox & b)
 {
+    float posX = GetPosX();
+    float posY = GetPosY();
+    float speedX = GetSpeedX();
+    float speedY = GetSpeedY();
+
     // Check for bound box
-    // case for a clam utility function
-    SetPosX(GetPosX() + GetSpeedX());
-    if ((GetPosX() + (2 * m_Width)) >= b.X)
+    SetPosX(posX + speedX);
+    if (( GetPosX() + m_Width) >= b.X)
     {
-        SetPosX(b.X - (2 * m_Width));
-        SetSpeedX(-GetSpeedX());
+        SetPosX(b.X - m_Width);
+        SetSpeedX(-speedX);
     }
     else if (GetPosX() <= b.ZeroX)
     {
         SetPosX(b.ZeroX);
-        SetSpeedX(-GetSpeedX());
+        SetSpeedX(-speedX);
     }
 
-    SetPosY(GetPosY() + GetSpeedY());
-    if (GetPosY() >= b.Y)
+    SetPosY(posY + speedY);
+    if ((GetPosY() + m_Height) >= b.Y)
     {
-        SetPosY(b.Y - (2 * m_Height));
-        SetSpeedY(-GetSpeedY());
+        SetPosY(b.Y - m_Height);
+        SetSpeedY(-speedY);
     }
     else if (GetPosY() <= b.ZeroY)
     {
         SetPosY(b.ZeroY);
-        SetSpeedY(-GetSpeedY());
+        SetSpeedY(-speedY);
     }
-    auto cur_position = m_Shape.getPosition();
-    cur_position.x += GetSpeedX();
-    cur_position.y += GetSpeedY();
-    m_Shape.setPosition(cur_position);
+
+    sf::Vector2f position = sf::Vector2f(GetPosX(), GetPosY());
+    m_Shape.setPosition(position);
 }
 
 sf::Shape * Rectangle::GetSFMLShape()

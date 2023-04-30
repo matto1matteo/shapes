@@ -24,35 +24,40 @@ sf::Shape * Circle::GetSFMLShape()
 
 void Circle::MoveShape(const BoundBox & b)
 {
+    float posX = GetPosX();
+    float posY = GetPosY();
+    float speedX = GetSpeedX();
+    float speedY = GetSpeedY();
+    float diameter = m_Radius * 2;
+
     // Check for bound box
     // case for a clam utility function
-    SetPosX(GetPosX() + GetSpeedX());
-    if ((GetPosX() + (2 * m_Radius)) >= b.X)
+    SetPosX(posX + speedX);
+    if ((GetPosX() + diameter) >= b.X)
     {
-        SetPosX(b.X - (2 * m_Radius));
-        SetSpeedX(-GetSpeedX());
+        SetPosX(b.X - diameter);
+        SetSpeedX(-speedX);
     }
     else if (GetPosX() <= b.ZeroX)
     {
         SetPosX(b.ZeroX);
-        SetSpeedX(-GetSpeedX());
+        SetSpeedX(-speedX);
     }
 
-    SetPosY(GetPosY() + GetSpeedY());
-    if (GetPosY() >= b.Y)
+    SetPosY(posY + speedY);
+    if (GetPosY() + diameter >= b.Y)
     {
-        SetPosY(b.Y - (2 * m_Radius));
-        SetSpeedY(-GetSpeedY());
+        SetPosY(b.Y - diameter);
+        SetSpeedY(-speedY);
     }
     else if (GetPosY() <= b.ZeroY)
     {
         SetPosY(b.ZeroY);
-        SetSpeedY(-GetSpeedY());
+        SetSpeedY(-speedY);
     }
-    auto cur_position = m_Shape.getPosition();
-    cur_position.x += GetSpeedX();
-    cur_position.y += GetSpeedY();
-    m_Shape.setPosition(cur_position);
+
+    sf::Vector2f position = sf::Vector2f(GetPosX(), GetPosY());
+    m_Shape.setPosition(position);
 }
 
 

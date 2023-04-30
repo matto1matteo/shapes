@@ -98,8 +98,8 @@ int Game::MainLoop()
         {
             BoundBox b = { 0, 0, m_Width, m_Height };
             shape->MoveShape(b);
-            auto color = shape->GetSFMLColor();
             sf::Shape * sfml_shape = shape->GetSFMLShape();
+            auto color = shape->GetSFMLColor();
             sfml_shape->setFillColor(color);
             w.draw(*sfml_shape);
         }
