@@ -22,7 +22,7 @@ sf::Shape * Circle::GetSFMLShape()
     return &m_Shape;
 }
 
-void Circle::MoveShape(BoundBox & b)
+void Circle::MoveShape(const BoundBox & b)
 {
     // Check for bound box
     // case for a clam utility function

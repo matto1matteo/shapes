@@ -16,7 +16,7 @@ public:
 
     std::string ToString() const override;
     sf::Shape * GetSFMLShape() override;
-    void MoveShape(BoundBox & b) override;
+    void MoveShape(const BoundBox & b) override;
 
 private:
     int m_Width;

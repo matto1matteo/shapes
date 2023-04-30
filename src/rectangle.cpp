@@ -22,7 +22,7 @@ std::string Rectangle::ToString() const
     return "";
 }
 
-void Rectangle::MoveShape(BoundBox & b)
+void Rectangle::MoveShape(const BoundBox & b)
 {
     // Check for bound box
     // case for a clam utility function

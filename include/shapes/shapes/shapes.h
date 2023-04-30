@@ -37,7 +37,7 @@ public:
     sf::Color GetSFMLColor() const;
 
     virtual sf::Shape * GetSFMLShape() = 0;
-    virtual void MoveShape(BoundBox & b) = 0;
+    virtual void MoveShape(const BoundBox & b) = 0;
 
 private:
     std::string m_Name;
